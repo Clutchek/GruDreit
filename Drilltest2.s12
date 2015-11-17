@@ -1,0 +1,70 @@
+; Drilltest2.s12
+	USE	Labdefs.s12
+	ORG	$1000
+	
+vridningsvinkel	EQU	%10
+
+start:		
+		LDAA	#0	; Reset
+		STAA	DrillControl
+		JSR	TillRefPos
+		JSR	Borra
+		JSR	Vrid1steg
+		JSR	Borra
+		JSR	Vrid1steg
+		JSR	Borra
+		JSR	Vrid1steg
+		JSR	Vrid1steg
+		JSR	Vrid1steg
+		JSR	Borra
+		JSR	GeLarm
+	
+stopp:		
+		BRA	stopp
+
+Vrid1steg:	
+		;LDAA	DipSwitch
+		;ANDA	#%10
+		LDAA	vridningsvinkel
+		STAA	DrillControl
+		ADDA	#1
+		STAA	DrillControl
+		;LDAA	DipSwitch
+		;ANDA	#%10
+		SUBA	#1
+		STAA	DrillControl
+		RTS
+		
+TillRefPos:	
+		LDAA 	$401
+		BITA 	#%1
+		BEQ	Vrid_loop
+		RTS
+Vrid_loop:
+		JSR	Vrid1steg
+		JMP	TillRefPos
+		
+Borra:		
+		LDAA	#%100 ;Starta borr
+		STAA	DrillControl
+		ADDA	#%1000 ;Sänk Borr
+		STAA	DrillControl
+		JSR 	BorrStatus_Loop
+		ANDA	#%11110111 ;Höj upp borr
+		STAA	DrillControl
+		LDAA	#0 ;Stäng av borr
+		STAA	DrillControl
+		RTS
+		
+BorrStatus_Loop:
+		PSHA
+		LDAA	$401
+		BITA	#%100
+		PULA
+		BEQ	BorrStatus_Loop
+		RTS
+		
+GeLarm:		
+		LDAA	#%10000
+		STAA	DrillControl
+		RTS
