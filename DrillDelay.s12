@@ -1,0 +1,12 @@
+	ORG	$1000
+	
+main:
+	LDAA	#12
+	STAA	DrillControl
+	JSR	DELAY
+	LDAA	#0
+	STAA	DrillControl
+	JSR	DELAY
+	JMP	main
+	
+	USE	DelayConst.s12
