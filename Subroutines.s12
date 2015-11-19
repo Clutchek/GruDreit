@@ -1,0 +1,33 @@
+;Subroutines.s12
+	USE	Labdefs.s12
+	ORG	$1000
+
+;Startvärde till DCShadow	
+start:
+	LDX	Zero_tabell
+	LDAB	#$FF
+	STAB	DCShadow
+	
+;Läs bit som skall nollställas
+Loop:	LDAB	InPort
+;.... och nollställ
+	JSR	Outzero
+; Läs kopian och ...
+	LDAA	DCShadow
+;.... visa denna på lysdioderna
+	STAA	OutPort
+	
+;Börja om
+	JMP	start
+
+Outzero:
+	LDAA	DCShadow
+	ANDA	B,X
+	STAA	DCShadow
+	STAA	DrillControl
+	RTS
+	
+Outone:	RTS
+	
+DCShadow	FCB	0
+Zero_tabell: FCB 	%11111110,%11111101,%11111011,%11110111,%11101111,%11011111,%10111111,%01111111
