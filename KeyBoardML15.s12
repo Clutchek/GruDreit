@@ -1,11 +1,10 @@
-	ORG	$1000
+;ORG	$1000
 	
-start:	
+GetKbdML15:	
 	JSR	CheckKbdML15
 	CMPB	#$FF
-	BEQ 	start
-	NOP
-	BRA	start
+	BEQ 	GetKbdML15
+	RTS
 	
 CheckKbdML15:
 	LDAB	$9C0
