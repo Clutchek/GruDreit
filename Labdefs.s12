@@ -9,14 +9,18 @@ HexDisplay	EQU	$0700
 DrillControl	EQU	$0400
 
 ; ... borrmaskinens statusregister
+#ifdef	SIMULATOR
 DrillStatus	EQU	$0401
+#else
+DrillStatus	EQU	$600
+#endif
 
 #ifdef	SIMULATOR
 #ifdef	RUNFAST
-DelayConst	EQU	9	; har du bestämt under förberedelserna
+DelayConst	EQU	9	; har du bestÃ¤mt under fÃ¶rberedelserna
 #else
-DelayConst	EQU	1	; har du bestämt under förberedelserna
+DelayConst	EQU	1	; har du bestÃ¤mt under fÃ¶rberedelserna
 #endif
 #else
-DelayConst	EQU	5	; din konstant för laborationssystemet
+DelayConst	EQU	7000	; din konstant fÃ¶r laborationssystemet
 #endif
