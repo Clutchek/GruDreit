@@ -4,14 +4,15 @@
 
 ;Startvärde till DCShadow	
 start:
-	LDX	#Zero_tabell
-	LDAB	#$FF
+	;LDAB	#$FF
+	LDAB	#$0
 	STAB	DCShadow
 	
 ;Läs bit som skall nollställas
 Loop:	LDAB	InPort
 ;.... och nollställ
-	JSR	Outzero
+	;JSR	Outzero
+	JSR	Outone
 ; Läs kopian och ...
 	LDAA	DCShadow
 ;.... visa denna på lysdioderna
@@ -21,13 +22,27 @@ Loop:	LDAB	InPort
 	JMP	start
 
 Outzero:
+	LDX	#Zero_tabell
+	BITB	#%11111000
+	BNE	Retur
 	LDAA	DCShadow
 	ANDA	B,X
 	STAA	DCShadow
 	STAA	DrillControl
 	RTS
 	
-Outone:	RTS
+Outone:
+	LDX	#One_tabell
+	BITB	#%11111000
+	BNE	Retur
+	LDAA	DCShadow
+	ORAA	B,X
+	STAA	DCShadow
+	STAA	DrillControl
+	RTS
+	
+Retur:	RTS
 	
 DCShadow	FCB	0
+One_tabell: FCB		%00000001,%00000010,%00000100,%00001000,%00010000,%00100000,%01000000,%10000000
 Zero_tabell: FCB 	%11111110,%11111101,%11111011,%11110111,%11101111,%11011111,%10111111,%01111111
