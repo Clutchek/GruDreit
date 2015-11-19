@@ -1,8 +1,10 @@
-#define		SIMULATOR
+;#define		SIMULATOR
 ;#define		RUNFAST
 
-		USE	Labdefs.s12
-		ORG	$1000
+
+		;ORG	$1000
+		;LDAB	#4
+		;STAB	DrillControl
 		
 Start:		CLRA
 DELAY:		LDX	#DelayConst
@@ -13,6 +15,7 @@ NEXT2:		LEAY	-1,Y
 		BNE	NEXT2
 		CPX	#0
 		BNE	NEXT
-		COMA
-		STAA	$400
-		BRA	DELAY
+		;BRA	DELAY
+		RTS
+		
+		USE	Labdefs.s12
