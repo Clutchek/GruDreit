@@ -1,5 +1,4 @@
 ; Drilltest2.s12
-	USE	Labdefs.s12
 	ORG	$1000
 	
 vridningsvinkel	EQU	%10
@@ -68,3 +67,6 @@ GeLarm:
 		LDAA	#%10000
 		STAA	DrillControl
 		RTS
+
+#define SIMULATOR
+		USE	Labdefs.s12
