@@ -1,8 +1,9 @@
 ; Drilltest1.s12
-	USE	Labdefs.s12
 	ORG	$1000
 	
 Dtest1:
 	LDAA	DipSwitch	;Läs styrord
 	STAA	DrillControl	;Skriv styrord
 	BRA	Dtest1
+	
+	USE	Labdefs.s12
