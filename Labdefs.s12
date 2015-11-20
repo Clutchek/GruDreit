@@ -2,7 +2,7 @@
 DipSwitch	EQU	$0600
 InPort		EQU	$0600
 
-OutPort		EQU	$0420
+OutPort		EQU	$0700
 
 HexDisplay	EQU	$0700
 ;Address till borrmaskinens styrregister
@@ -17,10 +17,10 @@ DrillStatus	EQU	$600
 
 #ifdef	SIMULATOR
 #ifdef	RUNFAST
-DelayConst	EQU	9	; har du bestÃ¤mt under fÃ¶rberedelserna
+DelayConst	EQU	11	; har du bestämt under förberedelserna
 #else
-DelayConst	EQU	1	; har du bestÃ¤mt under fÃ¶rberedelserna
+DelayConst	EQU	1	; har du bestämt under förberedelserna
 #endif
 #else
-DelayConst	EQU	7000	; din konstant fÃ¶r laborationssystemet
+DelayConst	EQU	7000	; din konstant för laborationssystemet
 #endif

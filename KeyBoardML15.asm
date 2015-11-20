@@ -11,7 +11,7 @@ CheckKbdML15:
 	BITB	#$80
 	BEQ	ReadKbd
 	LDAB	#$FF
-	JMP 	KeyboardRetur
+	JMP 	Retur
 	
 	
 ReadKbd:
@@ -23,18 +23,18 @@ Read_Loop:
 	BITB	#$80
 	BEQ	Read_Loop
 	PULB
-	JMP	KeyboardRetur
+	JMP	Retur
 	
 	
 	
-KeyboardRetur:
+Retur:
 	RTS
 	
 
 CheckKbd_First:
 	LDAB	$9C0
 	BITB	#$80
-	BEQ	KeyboardRetur
+	BEQ	Retur
 	LDAB 	#$FF
-	JMP	KeyboardRetur
+	JMP	Retur
 	

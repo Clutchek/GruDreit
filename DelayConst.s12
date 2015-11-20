@@ -1,3 +1,4 @@
+
 ;#define		SIMULATOR
 ;#define		RUNFAST
 
@@ -7,7 +8,9 @@
 		;STAB	DrillControl
 		
 Start:		CLRA
-DELAY:		LDX	#DelayConst
+DELAY:		
+		PSHX
+		LDX	#DelayConst
 NEXT:		LEAX	-1,X
 		LDY	#100
 NEXT2:		LEAY	-1,Y
@@ -16,6 +19,7 @@ NEXT2:		LEAY	-1,Y
 		CPX	#0
 		BNE	NEXT
 		;BRA	DELAY
+		PULX
 		RTS
 		
 		USE	Labdefs.s12

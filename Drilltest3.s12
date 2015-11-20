@@ -1,0 +1,26 @@
+#define SIMULATOR
+#define	RUNFAST
+
+;Drilltest3.s12
+	USE	Labdefs.s12
+	ORG	$1000
+	
+start:
+	JSR	Vrid1steg
+	BRA	start
+	
+	USE	DelayConst.s12
+
+	
+Vrid1steg:
+	LDAA	#%10	;vridningsvinkel
+	STAA	DrillControl
+	ADDA	#1
+	STAA	DrillControl
+	JSR	DELAY
+	SUBA	#1
+	STAA	DrillControl
+	
+	RTS
+	
+;vridningsvinkel	EQU	%10

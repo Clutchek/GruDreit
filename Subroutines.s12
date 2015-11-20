@@ -1,27 +1,28 @@
 ;Subroutines.s12
 	USE	Labdefs.s12
-	ORG	$1000
+;	ORG	$1000
 
-;Startv√§rde till DCShadow	
+;Startv‰rde till DCShadow	
 start:
 	;LDAB	#$FF
 	LDAB	#$0
 	STAB	DCShadow
 	
-;L√§s bit som skall nollst√§llas
+;L‰s bit som skall nollst‰llas
 Loop:	LDAB	InPort
-;.... och nollst√§ll
+;.... och nollst‰ll
 	;JSR	Outzero
 	JSR	Outone
-; L√§s kopian och ...
+; L‰s kopian och ...
 	LDAA	DCShadow
-;.... visa denna p√• lysdioderna
+;.... visa denna pÂ lysdioderna
 	STAA	OutPort
 	
-;B√∂rja om
+;Bˆrja om
 	JMP	start
 
 Outzero:
+	PSHX
 	LDX	#Zero_tabell
 	BITB	#%11111000
 	BNE	Retur
@@ -29,9 +30,11 @@ Outzero:
 	ANDA	B,X
 	STAA	DCShadow
 	STAA	DrillControl
+	PULX
 	RTS
 	
 Outone:
+	PSHX
 	LDX	#One_tabell
 	BITB	#%11111000
 	BNE	Retur
@@ -39,20 +42,171 @@ Outone:
 	ORAA	B,X
 	STAA	DCShadow
 	STAA	DrillControl
+	PULX
 	RTS
 	
 Retur:	RTS
 
 MotorStart:	LDAB	#2
-		LDX	DCShadow
-		BITX	#%00000100
+		LDAA	DCShadow
+		BITA	#%00000100
 		BNE	EndMotorStart
 		JSR	Outone
 		JSR	DELAY
 		JSR	DELAY
 EndMotorStart:
 		RTS
+MotorStopp:
+		LDAB	#2
+		JSR	Outzero
+		RTS
+		
+DrillUp:
+		LDAB	#3
+		JSR	Outzero
+		RTS
+DrillDown:
+		LDAB	#3
+		JSR	Outone
+		RTS
+		
+Alarm:
+		BITB	#$FF
+		BEQ	AlarmRetur
+		
+AlarmActivate:
+		PSHB
+		LDAB	#4
+		JSR	Outone
+		JSR	DELAY
+		JSR	DELAY
+		JSR	Outzero
+		PULB
+		DECB
+		BEQ	AlarmRetur
+		JSR	DELAY
+		JMP	AlarmActivate
+		
+		
+AlarmRetur:	RTS
+
+Step:
+		LDAA	DrillStatus
+		BITA	#%00000010
+		BEQ	StepAlarm
+		JSR	Vrid1steg
+		JSR	DELAY
+		LDAB 	#1
+		RTS
+		
+Vrid1steg:
+		LDAB	#1
+		JSR	Outone ; ettst‰lla vridningsvinkel
+		LDAB	#0
+		JSR	Outone
+		JSR	DELAY
+		JSR	Outzero
+		RTS
+		
+StepAlarm:
+		LDAB	#2
+		JSR	Alarm
+		LDAB	#0
+		RTS
+		
+DrillDownTest:
+		LDAB	#10 ;retry
+		
+DrillTest_loop:
+		LDAA	DCShadow
+		BITA	#%100			;kollar motorstatus
+		BEQ	DrillTest_Alarm		;motor av
+		LDAA	DrillStatus
+		BITA	#%100			;kollar bottenl‰ge
+		BNE	DrillTestDown_retur	;motor nere
+		JSR	DELAY
+		DECB
+		BNE	DrillTest_loop
+		
+DrillTest_Alarm:
+		LDAB	#2
+		JSR	Alarm
+		LDAB	#0
+		RTS
+		
+DrillTestDown_retur:	
+		LDAB	#1	
+		RTS
+		
+DrillHole:
+	JSR	DrillDown
+	JSR	DrillDownTest
+	PSHB
+	JSR	DrillUp
+	PULB
+	RTS
 	
-DCShadow	RMB	0
+RefPos:
+	LDAB	DrillStatus
+	BITB	#1
+	BNE	RefPosReturn_inPos
+	JSR	Step
+	;TFR	B,X
+	BITB	#$FF
+	BNE	RefPos
+	LDAB	#0
+	RTS
+	
+RefPosReturn_inPos
+	LDAB	#1
+	RTS
+	
+NStep:
+		BITB	#$FF
+		BEQ	NStep_Success
+		DECB
+		PSHB
+		JSR	Step ;Felet!
+		BITB	#$FF
+		BEQ	NStep_Failure
+		PULB
+		JMP	NStep
+		
+NStep_Success:
+		LDAB	#1
+		RTS
+
+NStep_Failure
+		PULB ;Korrigera stack
+		LDAB #0
+		RTS
+		
+DoAuto:
+		JSR	RefPos
+		BITB	#1
+		BEQ	DoAuto_End
+		JSR	MotorStart
+		
+DoAuto_Loop:
+		;TFR	X,B
+		LDAB	,X
+		INX
+		CMPB	#$FF
+		BEQ	DoAuto_End
+		JSR	NStep
+		BITB	#$FF
+		BEQ	DoAuto_End
+		JSR	DrillHole
+		BITB	#$FF
+		BEQ	DoAuto_End
+		JMP	DoAuto_Loop
+		
+		
+DoAuto_End:
+		JSR	MotorStopp
+		RTS
+	
+DCShadow	RMB	1
+
 One_tabell: FCB		%00000001,%00000010,%00000100,%00001000,%00010000,%00100000,%01000000,%10000000
 Zero_tabell: FCB 	%11111110,%11111101,%11111011,%11110111,%11101111,%11011111,%10111111,%01111111

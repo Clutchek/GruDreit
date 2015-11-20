@@ -1,4 +1,7 @@
 ; Drilltest2.s12
+#define SIMULATOR
+#define RUNFAST
+	USE	Labdefs.s12
 	ORG	$1000
 	
 vridningsvinkel	EQU	%10
@@ -32,6 +35,7 @@ Vrid1steg:
 		;ANDA	#%10
 		SUBA	#1
 		STAA	DrillControl
+		;JSR	DELAY
 		RTS
 		
 TillRefPos:	
@@ -46,12 +50,12 @@ Vrid_loop:
 Borra:		
 		LDAA	#%100 ;Starta borr
 		STAA	DrillControl
-		ADDA	#%1000 ;SÃ¤nk Borr
+		ADDA	#%1000 ;Sänk Borr
 		STAA	DrillControl
 		JSR 	BorrStatus_Loop
-		ANDA	#%11110111 ;HÃ¶j upp borr
+		ANDA	#%11110111 ;Höj upp borr
 		STAA	DrillControl
-		LDAA	#0 ;StÃ¤ng av borr
+		LDAA	#0 ;Stäng av borr
 		STAA	DrillControl
 		RTS
 		
@@ -67,6 +71,5 @@ GeLarm:
 		LDAA	#%10000
 		STAA	DrillControl
 		RTS
-
-#define SIMULATOR
-		USE	Labdefs.s12
+		
+		;USE	DelayConst.s12
