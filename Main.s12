@@ -1,0 +1,78 @@
+;	Main.s12
+;	Operatörsstyrd borrautomat
+
+;	Definitioner
+	USE	Labdefs.s12
+
+	ORG	$1000
+	
+main:
+	;Initiera borrmaskin
+	
+; Huvudprogram, invänta vald operation
+main_loop:
+	JSR	GetKbdML15
+* Tangentkod nu i reg B...
+* Utför vald operation
+	JSR	Command
+	BRA	main_loop
+	
+;------------------------------
+Command:
+;giltigt värde?
+	CMPB	#7
+	BHI	CommandExit
+;pekartabellens basaddress
+	LDX	#JUMPTAB
+;offset är 2 bytes per adress
+	ASLB
+;hämta subrutinens startaddress
+	LDX	B,X
+;utför subrutin
+	JSR	,X
+;återvänd från kommandorutin
+CommandExit:
+	RTS
+	
+;-------------------------------------
+JUMPTAB	FDB	SUB0,SUB1,SUB2,SUB3
+	FDB	SUB4,SUB5,SUB6,SUB7
+;-------------------------------------
+;subrutiner för test
+SUB0	MOVB	#$00,DrillControl
+	MOVB	#$00,DCShadow
+	RTS
+SUB1	MOVB	#$00,DrillControl
+	MOVB	#$00,DCShadow
+	RTS
+SUB2	MOVB	#$00,DrillControl
+	MOVB	#$00,DCShadow
+	RTS
+SUB3	MOVB	#$00,DrillControl
+	MOVB	#$00,DCShadow
+	RTS
+SUB4	MOVB	#$00,DrillControl
+	MOVB	#$00,DCShadow
+	RTS
+SUB5	MOVB	#$00,DrillControl
+	MOVB	#$00,DCShadow
+	RTS
+SUB6	MOVB	#$00,DrillControl
+	MOVB	#$00,DCShadow
+	RTS
+SUB7	MOVB	#$00,DrillControl
+	MOVB	#$00,DCShadow
+	RTS
+	
+;------------------------------
+;Placera USE-direktiv här
+	;USE	ML15drvr.s12
+	USE	KeyBoardML15.s12
+	
+;Placera alla globala vars här
+DCShadow: RMB	1
+
+
+
+
+
