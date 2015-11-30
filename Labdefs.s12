@@ -24,3 +24,10 @@ DelayConst	EQU	1	; har du bestämt under förberedelserna
 #else
 DelayConst	EQU	7000	; din konstant för laborationssystemet
 #endif
+
+;	ML19 definitioner
+ML19_Stat	EQU	$0DC0
+;	Kvittera Händelse 1
+ML19_AckIrq_1	EQU	$0DC2
+;	Nollställ händelse 2
+ML19_AckIrq_2	EQU	$0DC3
