@@ -1,0 +1,59 @@
+;	Drill.s12
+;	Operatörsstyrd borrautomat
+
+;	Definitioner
+#define	SIMULATOR	
+#define	RUNFAST
+
+	USE	Labdefs.s12
+
+;	ORG	$1000
+	
+main:
+	;Initiera borrmaskin
+	
+; Huvudprogram, invänta vald operation
+main_loop:
+	JSR	GetKbdML15
+* Tangentkod nu i reg B...
+* Utför vald operation
+	JSR	Command
+	BRA	main_loop
+	
+;------------------------------
+Command:
+;giltigt värde?
+	CMPB	#7
+	BHI	CommandExit
+;pekartabellens basaddress
+	LDX	#JUMPTAB
+;offset är 2 bytes per adress
+	ASLB
+;hämta subrutinens startaddress
+	LDX	B,X
+;utför subrutin
+	JSR	,X
+;återvänd från kommandorutin
+CommandExit:
+	RTS
+	
+;-------------------------------------
+JUMPTAB	FDB	MotorStart,MotorStopp,DrillDown,DrillUp
+	FDB	Step,DrillHole,RefPos,Auto
+;-------------------------------------
+;subrutiner för test
+Auto:
+	LDX	#Pattern
+	JSR	DoAuto
+	RTS
+;------------------------------
+;Placera USE-direktiv här
+	;USE	ML15drvr.s12
+	USE	KeyBoardML15.s12
+	USE 	DelayConst.s12
+	USE	Subroutines.s12
+	
+;Placera alla globala vars här
+Pattern: FCB	0,1,1,1,1,1,1,1,2,1,5,2,2,2,2,4,4,3,8,2,$FF ; =)
+
+

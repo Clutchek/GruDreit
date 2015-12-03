@@ -193,6 +193,7 @@ DoAuto_Loop:
 		INX
 		CMPB	#$FF
 		BEQ	DoAuto_End
+		JSR	DELAY
 		JSR	NStep
 		BITB	#$FF
 		BEQ	DoAuto_End

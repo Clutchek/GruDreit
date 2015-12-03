@@ -1,0 +1,49 @@
+*	Kernel.s12
+	ORG	$1000
+	
+	
+huvudshit:
+	; Initiera stack för Display.
+	LDAA	#0
+	STAA	$2500
+	STAA	$2501
+	STAA	$2502
+	STAA	$2503
+	STAA	$2504
+	STAA	$2505
+	STAA	$2506
+	LDD	#DISPLAY
+	STD	$2507
+	
+	LDD	#$2500
+	STD	OLD_SP
+	LDX	#IrqR  ;	Initiera avbrottsvektor IRQ
+	STX	$3FF2
+	LDS	#$3100
+	CLI
+	BRA	main
+	
+	
+IrqR:
+	;ACKA ml19
+	CLR	$0DC2 
+	;CLR	ML19_AckIrq_1
+	CLR	$0DC3 
+	;CLR	ML19_AckIrq_2
+	
+	;LDY	,SP
+	TSY	; SP -> Y
+	LDS	OLD_SP ; OLD_SP -> SP
+	
+	STY	OLD_SP ; SP -> OLD_SP
+	CLI
+	RTI
+
+
+;	Globala variablar
+OLD_SP		FDB	$2500
+DisplaySP	FDB	$2500
+	
+;	Använda filler
+	USE	Drill.s12
+	USE	Display_ML5.s12
