@@ -69,3 +69,9 @@ $RECYCLE.BIN/
 *.lnk
 # Thumbnails
 ._*
+
+### Codelitecp ###
+.codelite
+*.mk
+*Makefile
+*.txt
