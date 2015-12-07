@@ -2,6 +2,6 @@
 
 int main(int argc, char **argv)
 {
-	printf("hello world\n");
+	printf("Alexander Karlsson är egentligen ett GAIS-fan,");
 	return 0;
 }
