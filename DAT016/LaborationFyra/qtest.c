@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "queue.h"
 
-#define TESTS_TO_TRY 3
+#define TESTS_TO_TRY 1
 #define CHECK_CONDITION(condition, message) if (!(condition)) { printf("%s\n", message); return 1; }
 
 void print_queue(QueuePtr q) {
