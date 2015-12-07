@@ -1,11 +1,13 @@
 #include "queue.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 /* Implementera interface från queue.h här */
 QueuePtr new_queue()
 {
     QueuePtr qPtr = (QueuePtr) malloc(sizeof(struct QueueElement));
     qPtr->prio = MAX_PRIO;
+    qPtr->next = 0;
     return qPtr;
 }
 
@@ -34,12 +36,12 @@ void clear(QueuePtr q)
 
 
 // räknar köns aktuella längd
-int  size(QueuePtr q)
+int size(QueuePtr q)
 {
-    int size = 1;
+    int size = 0;
     QueuePtr temp = q;
-    while(temp ){
-        size = size +1;
+    while(temp->next){
+        size = size + 1;
         temp = temp->next;
     }
     
@@ -52,6 +54,7 @@ QueuePtr createQueueElement(QueuePtr q, int prio, DataPtr d)
     //malloc data?
     qPtr->prio = prio;
     qPtr->data = d;
+    qPtr->next = 0;
     q->next = qPtr;
     return qPtr;
 }
@@ -60,22 +63,27 @@ QueuePtr createQueueElement(QueuePtr q, int prio, DataPtr d)
 void add(QueuePtr q, int prio, DataPtr d)
 {
         //Kollar om size är 1 för annars antar vi att det finns ett nästa element så hanterar detta fall.
-        if(size(q) == 1)
+        if(!q->next)
         {
             createQueueElement(q, prio, d);
             return;
         }
-        
-        //Gör temp som peker på next, dvs skippar "dummy"
-        QueuePtr temp = q->next;
-        
+        //Skapa temp variabel
+        QueuePtr temp = q;
         //While tills rätt plats
-        while((temp->next ) && (temp->next->prio > prio))
+        while(temp->next)
         {
-            temp = q->next;
+            if(temp->next->prio>=prio)
+            {
+                temp = temp->next;
+            }
+            else
+            {
+                break;
+            }
         }
         //Hämtar det som finns framåt i kön
-        QueuePtr nextTemp = q->next;
+        QueuePtr nextTemp = temp->next;
         
         //Skapar köelement på rätt plats, pekar bakåt
         QueuePtr newPtr = createQueueElement(temp, prio, d);
