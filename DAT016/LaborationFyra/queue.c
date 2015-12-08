@@ -25,7 +25,7 @@ void clear(QueuePtr q)
     while(temp)
     {
                 QueuePtr nextElement = temp->next;
-                free(temp->data);
+                //free(temp->data);
                 free(temp);
                 temp = nextElement;
     }
@@ -106,7 +106,7 @@ void remove_first(QueuePtr q)
 				QueuePtr firstElement = q->next;
                 if(firstElement){
                         QueuePtr newStart  = firstElement->next;
-                        free(firstElement->data);
+                        //free(firstElement->data);
                         free(firstElement);
                         q->next = newStart;
                 }
