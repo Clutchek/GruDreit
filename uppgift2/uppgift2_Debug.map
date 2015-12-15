@@ -1,4 +1,4 @@
-QLD (Version 4.8.1)- Link/Load Summary: 'debug\ML4_Debug.s19'
+QLD (Version 4.8.1)- Link/Load Summary: 'debug\uppgift2_Debug.s19'
 SCRIPT FILES FROM THE FOLLOWING PATH(S):
   'C:/Program Files (x86)/GMV/EducDist/config/xcc12'
 
@@ -14,9 +14,9 @@ SCRIPT READ FROM THE FOLLOWING FILE(S):
 ---------------------------
  GROUPS AND SEGMENTS:
 
-  GROUP 'test_group', READ/WRITE ,allocation to: 00001000 - 0000101F, (size: 32 Bytes)
+  GROUP 'test_group', READ/WRITE ,allocation to: 00001000 - 000010D7, (size: 216 Bytes)
    00001000 00001009 'init'
-   0000100A 0000101F 'text'
+   0000100A 000010D7 'text'
 
   GROUP 'interrupt_vectors', READ/WRITE
    NO SEGMENTS
@@ -29,8 +29,12 @@ LINKER DEFINED CONSTANTS:
    __heap_start = 00000000
   from segment 'text'
    0000100A '__text__start'
-   00001020 '__text__end'
-   00000016 '__text__size'
+   000010D8 '__text__end'
+   000000CE '__text__size'
+  from segment 'init'
+   00001000 '__init__start'
+   0000100A '__init__end'
+   0000000A '__init__size'
   from segment 'bss'
    00000000 '__bss__start'
    00000000 '__bss__end'
@@ -43,20 +47,25 @@ LINKER DEFINED CONSTANTS:
    00000000 '__rodata__start'
    00000000 '__rodata__end'
    00000000 '__rodata__size'
-  from segment 'init'
-   00001000 '__init__start'
-   0000100A '__init__end'
-   0000000A '__init__size'
 ---------------------------
 GLOBAL SYMBOL(S):
-
- in module: 'ML4' of type 'O12' defined in file 'ML4.o12'
-  in segment: 'text'
-   0000100A '_main'
 
  in module: 'appstart' of type 'O12' defined in file 'appstart.o12'
   in segment: 'init'
    00001006 '_exit'
    00001000 '__start'
+
+ in module: 'keyboardml15' of type 'O12' defined in file 'keyboardml15.o12'
+  in segment: 'text'
+   0000100A '_get_key'
+
+ in module: 'displayml15' of type 'O12' defined in file 'displayml15.o12'
+  in segment: 'text'
+   0000102C '_display_digits'
+   00001067 '_display_dec'
+
+ in module: 'main' of type 'O12' defined in file 'main.o12'
+  in segment: 'text'
+   000010B2 '_main'
 ---
  End of listfile

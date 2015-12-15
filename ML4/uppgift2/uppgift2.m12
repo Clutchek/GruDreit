@@ -4,7 +4,6 @@
 #
 #-----------------------------------------------
 #SETTINGS SECTION
-##CSIMSET=".\ml4-simple.hc12sim"
 ##EXTMAKEFILE=""
 ##EXTMAKEFILEPARAM=""
 #+[BackCol(0)]=
@@ -46,15 +45,12 @@
 #-----------------------------------------------
 #PROJECT FILES SECTION
 
-FILES= \
-	".\ML4.c" "" "1"  \
-	".\appstart.s12" "" "1"  \
-	".\ports.h" "" "1" 
+FILES=
 #-----------------------------------------------
 #PROJECT OPTIONS SECTION
 
 !IFCONF	Debug
-##TARGETNAME="ML4_Debug"
+##TARGETNAME="uppgift2_Debug"
 ##OBJDIR="debug"
 ##TARGDIR="debug"
 ##STDINCPATH=0
@@ -65,9 +61,7 @@ LNFLAGS=-g -i default.lsc
 #-----------------------------------------------
 #OBJECT FILES SECTION
 
-OBJ= \
-	"debug\ML4.o12" \
-	"debug\appstart.o12"
+OBJ=
 #-----------------------------------------------
 #DEFINES/UNDEFINES SECTION
 
@@ -107,33 +101,23 @@ LIBPATH=
 #RULES SECTION CONFIGURATION 
 
 # Application
-"debug\ML4_Debug.s19": $(OBJ)
-	LINK -o"debug\ML4_Debug.s19" $(LNFLAGS)  $(LIBPATH) $(LIB) -l"C:\Program Files (x86)\GMV\EducDist\bin\..\lib\xcc12\libccd.e12"  $(OBJ)
+"debug\uppgift2_Debug.s19": $(OBJ)
+	LINK -o"debug\uppgift2_Debug.s19" $(LNFLAGS)  $(LIBPATH) $(LIB) -l"C:\Program Files (x86)\GMV\EducDist\bin\..\lib\xcc12\libccd.e12"  $(OBJ)
 #-----------------------------------------------
 
 
 # Clean
 clean:
-	RMFI "debug\ML4_Debug.s19"
-	RMFI "debug\ML4.o12"
-	RMFI "debug\appstart.o12"
-	RMFI "debug\ports.o12"
+	RMFI "debug\uppgift2_Debug.s19"
 #-----------------------------------------------
 
 
 # Dependencies and their build rules
 
-"debug\ML4.o12":	\
-	"C:/Users/nalex/Java/grudreit/ML4/ML4.c"\
-	"C:/Users/nalex/Java/grudreit/ML4/ports.h"
-	COMP  $(CCFLAGS) $(DEF) $(UNDEF)  $(INC) -o"debug\ML4.o12" "C:/Users/nalex/Java/grudreit/ML4/ML4.c"
-"debug\appstart.o12":	\
-	"C:/Users/nalex/Java/grudreit/ML4/appstart.s12"
-	ASSM  $(ASFLAGS) $(ASMDEF) -o"debug\appstart.o12" "C:/Users/nalex/Java/grudreit/ML4/appstart.s12"
 !EICONF	Debug
 
 !IFCONF	Final
-##TARGETNAME="ML4_Final"
+##TARGETNAME="uppgift2_Final"
 ##OBJDIR="final"
 ##TARGDIR="final"
 ##STDINCPATH=1
@@ -144,9 +128,7 @@ LNFLAGS=-i default.lsc
 #-----------------------------------------------
 #OBJECT FILES SECTION
 
-OBJ= \
-	"final\ML4.o12" \
-	"final\appstart.o12"
+OBJ=
 #-----------------------------------------------
 #DEFINES/UNDEFINES SECTION
 
@@ -188,28 +170,17 @@ LIBPATH=
 #RULES SECTION CONFIGURATION 
 
 # Application
-"final\ML4_Final.s19": $(OBJ)
-	LINK -o"final\ML4_Final.s19" $(LNFLAGS)  $(LIBPATH) $(LIB) -L"C:\Program Files (x86)\GMV\EducDist\bin\..\lib\xcc12" -l"C:\Program Files (x86)\GMV\EducDist\bin\..\lib\xcc12\libcc.e12"  $(OBJ)
+"final\uppgift2_Final.s19": $(OBJ)
+	LINK -o"final\uppgift2_Final.s19" $(LNFLAGS)  $(LIBPATH) $(LIB) -L"C:\Program Files (x86)\GMV\EducDist\bin\..\lib\xcc12" -l"C:\Program Files (x86)\GMV\EducDist\bin\..\lib\xcc12\libcc.e12"  $(OBJ)
 #-----------------------------------------------
 
 
 # Clean
 clean:
-	RMFI "final\ML4_Final.s19"
-	RMFI "final\ML4.o12"
-	RMFI "final\appstart.o12"
-	RMFI "final\ports.o12"
+	RMFI "final\uppgift2_Final.s19"
 #-----------------------------------------------
 
 
 # Dependencies and their build rules
 
-"final\ML4.o12":	\
-	"C:/Users/nalex/Java/grudreit/ML4/ML4.c"\
-	"C:/Users/nalex/Java/grudreit/ML4/ports.h"
-	COMP  $(CCFLAGS) $(DEF) $(UNDEF)  \
-	-I"C:\Program Files (x86)\GMV\EducDist\bin\..\include" $(INC) -o"final\ML4.o12" "C:/Users/nalex/Java/grudreit/ML4/ML4.c"
-"final\appstart.o12":	\
-	"C:/Users/nalex/Java/grudreit/ML4/appstart.s12"
-	ASSM  $(ASFLAGS) $(ASMDEF) -o"final\appstart.o12" "C:/Users/nalex/Java/grudreit/ML4/appstart.s12"
 !EICONF	Final
