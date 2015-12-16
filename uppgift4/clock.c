@@ -29,7 +29,9 @@ void init_clock(void)
 void clock_inter(void)
 {
 	clockCounter++;
+	#ifdef DISPLAY_ACTIVE
 	display_dec(((unsigned int)clockCounter));
+	#endif
 	CRGFLG |= 0x80; //ackar, skriver etta till sjunde biten
 }
 

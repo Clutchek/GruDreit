@@ -1,0 +1,56 @@
+mod:_sub32:O12:_sub32.o12
+seg:text:15
+seg:bss:0
+seg:data:0
+seg:rodata:0
+C:text	EC84A388B7C6EC82E287A286B7C63D
+G:text:_sub32:00000000:sub32
+SY:C:M:_sub32$../src/libcc/common/_sub32.c
+SY:C:F:_sub32:text:sub32:00000000:10
+SY:C:X:_sub32:10:13:text:0
+SY:C:S:F:_sub32:sub32:sub32:(typ2)(typ1)(typ1)
+SY:C:S:L:_sub32:sub32:a:2:(typ1)
+SY:C:S:L:_sub32:sub32:b:6:(typ1)
+SY:C:S:F:_sub32:__func__:___func__:(typ11)
+SY:C:X:_sub32:125:2:text:0
+SY:C:X:_sub32:126:2:text:2
+SY:C:X:_sub32:127:2:text:4
+SY:C:X:_sub32:128:2:text:6
+SY:C:X:_sub32:129:2:text:8
+SY:C:X:_sub32:130:2:text:A
+SY:C:X:_sub32:131:2:text:C
+SY:C:X:_sub32:135:1:text:E
+SY:C:Z:_sub32:135:1:text:E
+SY:C:E:_sub32:text:sub32:0000000F:135
+SY:C:T:  typ0 V (-1)
+SY:C:T:  typ1 L (4)
+SY:C:T:  typ2 l (4)
+SY:C:T:  typ3 C (1)
+SY:C:T:  typ4 c (1)
+SY:C:T:  typ5 S (2)
+SY:C:T:  typ6 s (2)
+SY:C:T:  typ7 g (4)
+SY:C:T:  typ8 G (4)
+SY:C:T:  typ9 h (4)
+SY:C:T:  typ10 R (2)
+SY:C:T:  typ11 I (2)
+SY:C:T:  typ12 i (2)
+SY:C:T:  typ13 E (2)
+SY:C:T:  typ14 F (2)
+SY:C:T:  typ15 P (2)
+SY:C:T:_sub32: typ16-_sub32 Z (4)U float_long {\
+f:(0):(typ7);\
+l:(0):(typ1);\
+}
+SY:C:T:_sub32: typ17-_sub32 Z (4)U long_int {\
+l:(0):(typ1);\
+s:(0):(typ18-_sub32);\
+}
+SY:C:T:_sub32: typ18-_sub32 Z (4)S {\
+msw:(0):(typ12);\
+lsw:(2):(typ12);\
+}
+SY:C:T: typ2 l (4)
+SY:C:T: typ4 c (1)
+SY:C:T: typ6 s (2)
+e

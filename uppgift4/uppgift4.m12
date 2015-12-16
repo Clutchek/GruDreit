@@ -4,7 +4,6 @@
 #
 #-----------------------------------------------
 #SETTINGS SECTION
-##CSIMSET=".\test.hc12sim"
 ##EXTMAKEFILE=""
 ##EXTMAKEFILEPARAM=""
 #+[BackCol(0)]=
@@ -43,11 +42,6 @@
 ##OTYPE=1
 #-----------------------------------------------
 #OPEN FILE SECTION
-##OF ".\clock.c"
-##OF ".\cock.s12"
-##OF ".\clock.h"
-##OF ".\main.c"
-##OF ".\appstart.s12"
 #-----------------------------------------------
 #PROJECT FILES SECTION
 
@@ -55,16 +49,16 @@ FILES= \
 	".\appstart.s12" "" "1"  \
 	".\clock.c" "" "1"  \
 	".\clock.h" "" "1"  \
-	".\ports.h" "" "1"  \
 	".\cock.s12" "" "1"  \
 	".\main.c" "" "1"  \
-	".\displayml15.c" "" "1"  \
-	".\displayml15.h" "" "1" 
+	".\ports.h" "" "1"  \
+	".\drill.c" "" "1"  \
+	".\drill.h" "" "1" 
 #-----------------------------------------------
 #PROJECT OPTIONS SECTION
 
 !IFCONF	Debug
-##TARGETNAME="uppgift3_Debug"
+##TARGETNAME="uppgift4_Debug"
 ##OBJDIR="debug"
 ##TARGDIR="debug"
 ##STDINCPATH=0
@@ -80,7 +74,7 @@ OBJ= \
 	"debug\clock.o12" \
 	"debug\cock.o12" \
 	"debug\main.o12" \
-	"debug\displayml15.o12"
+	"debug\drill.o12"
 #-----------------------------------------------
 #DEFINES/UNDEFINES SECTION
 
@@ -120,51 +114,49 @@ LIBPATH=
 #RULES SECTION CONFIGURATION 
 
 # Application
-"debug\uppgift3_Debug.s19": $(OBJ)
-	LINK -o"debug\uppgift3_Debug.s19" $(LNFLAGS)  $(LIBPATH) $(LIB) -l"C:\Program Files (x86)\GMV\EducDist\bin\..\lib\xcc12\libccd.e12"  $(OBJ)
+"debug\uppgift4_Debug.s19": $(OBJ)
+	LINK -o"debug\uppgift4_Debug.s19" $(LNFLAGS)  $(LIBPATH) $(LIB) -l"C:\Program Files (x86)\GMV\EducDist\bin\..\lib\xcc12\libccd.e12"  $(OBJ)
 #-----------------------------------------------
 
 
 # Clean
 clean:
-	RMFI "debug\uppgift3_Debug.s19"
+	RMFI "debug\uppgift4_Debug.s19"
 	RMFI "debug\appstart.o12"
 	RMFI "debug\clock.o12"
 	RMFI "debug\clock.o12"
-	RMFI "debug\ports.o12"
 	RMFI "debug\cock.o12"
 	RMFI "debug\main.o12"
-	RMFI "debug\displayml15.o12"
-	RMFI "debug\displayml15.o12"
+	RMFI "debug\ports.o12"
+	RMFI "debug\drill.o12"
+	RMFI "debug\drill.o12"
 #-----------------------------------------------
 
 
 # Dependencies and their build rules
 
 "debug\appstart.o12":	\
-	"C:/Users/nalex/Java/grudreit/uppgift3/appstart.s12"
-	ASSM  $(ASFLAGS) $(ASMDEF) -o"debug\appstart.o12" "C:/Users/nalex/Java/grudreit/uppgift3/appstart.s12"
+	"C:/Users/nalex/Java/grudreit/uppgift4/appstart.s12"
+	ASSM  $(ASFLAGS) $(ASMDEF) -o"debug\appstart.o12" "C:/Users/nalex/Java/grudreit/uppgift4/appstart.s12"
 "debug\clock.o12":	\
-	"C:/Users/nalex/Java/grudreit/uppgift3/clock.c"\
-	"C:/Users/nalex/Java/grudreit/uppgift3/ports.h"\
-	"C:/Users/nalex/Java/grudreit/uppgift3/clock.h"
-	COMP  $(CCFLAGS) $(DEF) $(UNDEF)  $(INC) -o"debug\clock.o12" "C:/Users/nalex/Java/grudreit/uppgift3/clock.c"
+	"C:/Users/nalex/Java/grudreit/uppgift4/clock.c"\
+	"C:/Users/nalex/Java/grudreit/uppgift4/ports.h"\
+	"C:/Users/nalex/Java/grudreit/uppgift4/clock.h"
+	COMP  $(CCFLAGS) $(DEF) $(UNDEF)  $(INC) -o"debug\clock.o12" "C:/Users/nalex/Java/grudreit/uppgift4/clock.c"
 "debug\cock.o12":	\
-	"C:/Users/nalex/Java/grudreit/uppgift3/cock.s12"
-	ASSM  $(ASFLAGS) $(ASMDEF) -o"debug\cock.o12" "C:/Users/nalex/Java/grudreit/uppgift3/cock.s12"
+	"C:/Users/nalex/Java/grudreit/uppgift4/cock.s12"
+	ASSM  $(ASFLAGS) $(ASMDEF) -o"debug\cock.o12" "C:/Users/nalex/Java/grudreit/uppgift4/cock.s12"
 "debug\main.o12":	\
-	"C:/Users/nalex/Java/grudreit/uppgift3/main.c"\
-	"C:/Users/nalex/Java/grudreit/uppgift3/clock.h"
-	COMP  $(CCFLAGS) $(DEF) $(UNDEF)  $(INC) -o"debug\main.o12" "C:/Users/nalex/Java/grudreit/uppgift3/main.c"
-"debug\displayml15.o12":	\
-	"C:/Users/nalex/Java/grudreit/uppgift3/displayml15.c"\
-	"C:/Users/nalex/Java/grudreit/uppgift3/displayml15.h"\
-	"C:/Users/nalex/Java/grudreit/uppgift3/ports.h"
-	COMP  $(CCFLAGS) $(DEF) $(UNDEF)  $(INC) -o"debug\displayml15.o12" "C:/Users/nalex/Java/grudreit/uppgift3/displayml15.c"
+	"C:/Users/nalex/Java/grudreit/uppgift4/main.c"\
+	"C:/Users/nalex/Java/grudreit/uppgift4/clock.h"
+	COMP  $(CCFLAGS) $(DEF) $(UNDEF)  $(INC) -o"debug\main.o12" "C:/Users/nalex/Java/grudreit/uppgift4/main.c"
+"debug\drill.o12":	\
+	"C:/Users/nalex/Java/grudreit/uppgift4/drill.c"
+	COMP  $(CCFLAGS) $(DEF) $(UNDEF)  $(INC) -o"debug\drill.o12" "C:/Users/nalex/Java/grudreit/uppgift4/drill.c"
 !EICONF	Debug
 
 !IFCONF	Final
-##TARGETNAME="uppgift3_Final"
+##TARGETNAME="uppgift4_Final"
 ##OBJDIR="final"
 ##TARGDIR="final"
 ##STDINCPATH=1
@@ -180,7 +172,7 @@ OBJ= \
 	"final\clock.o12" \
 	"final\cock.o12" \
 	"final\main.o12" \
-	"final\displayml15.o12"
+	"final\drill.o12"
 #-----------------------------------------------
 #DEFINES/UNDEFINES SECTION
 
@@ -222,48 +214,46 @@ LIBPATH=
 #RULES SECTION CONFIGURATION 
 
 # Application
-"final\uppgift3_Final.s19": $(OBJ)
-	LINK -o"final\uppgift3_Final.s19" $(LNFLAGS)  $(LIBPATH) $(LIB) -L"C:\Program Files (x86)\GMV\EducDist\bin\..\lib\xcc12" -l"C:\Program Files (x86)\GMV\EducDist\bin\..\lib\xcc12\libcc.e12"  $(OBJ)
+"final\uppgift4_Final.s19": $(OBJ)
+	LINK -o"final\uppgift4_Final.s19" $(LNFLAGS)  $(LIBPATH) $(LIB) -L"C:\Program Files (x86)\GMV\EducDist\bin\..\lib\xcc12" -l"C:\Program Files (x86)\GMV\EducDist\bin\..\lib\xcc12\libcc.e12"  $(OBJ)
 #-----------------------------------------------
 
 
 # Clean
 clean:
-	RMFI "final\uppgift3_Final.s19"
+	RMFI "final\uppgift4_Final.s19"
 	RMFI "final\appstart.o12"
 	RMFI "final\clock.o12"
 	RMFI "final\clock.o12"
-	RMFI "final\ports.o12"
 	RMFI "final\cock.o12"
 	RMFI "final\main.o12"
-	RMFI "final\displayml15.o12"
-	RMFI "final\displayml15.o12"
+	RMFI "final\ports.o12"
+	RMFI "final\drill.o12"
+	RMFI "final\drill.o12"
 #-----------------------------------------------
 
 
 # Dependencies and their build rules
 
 "final\appstart.o12":	\
-	"C:/Users/nalex/Java/grudreit/uppgift3/appstart.s12"
-	ASSM  $(ASFLAGS) $(ASMDEF) -o"final\appstart.o12" "C:/Users/nalex/Java/grudreit/uppgift3/appstart.s12"
+	"C:/Users/nalex/Java/grudreit/uppgift4/appstart.s12"
+	ASSM  $(ASFLAGS) $(ASMDEF) -o"final\appstart.o12" "C:/Users/nalex/Java/grudreit/uppgift4/appstart.s12"
 "final\clock.o12":	\
-	"C:/Users/nalex/Java/grudreit/uppgift3/clock.c"\
-	"C:/Users/nalex/Java/grudreit/uppgift3/ports.h"\
-	"C:/Users/nalex/Java/grudreit/uppgift3/clock.h"
+	"C:/Users/nalex/Java/grudreit/uppgift4/clock.c"\
+	"C:/Users/nalex/Java/grudreit/uppgift4/ports.h"\
+	"C:/Users/nalex/Java/grudreit/uppgift4/clock.h"
 	COMP  $(CCFLAGS) $(DEF) $(UNDEF)  \
-	-I"C:\Program Files (x86)\GMV\EducDist\bin\..\include" $(INC) -o"final\clock.o12" "C:/Users/nalex/Java/grudreit/uppgift3/clock.c"
+	-I"C:\Program Files (x86)\GMV\EducDist\bin\..\include" $(INC) -o"final\clock.o12" "C:/Users/nalex/Java/grudreit/uppgift4/clock.c"
 "final\cock.o12":	\
-	"C:/Users/nalex/Java/grudreit/uppgift3/cock.s12"
-	ASSM  $(ASFLAGS) $(ASMDEF) -o"final\cock.o12" "C:/Users/nalex/Java/grudreit/uppgift3/cock.s12"
+	"C:/Users/nalex/Java/grudreit/uppgift4/cock.s12"
+	ASSM  $(ASFLAGS) $(ASMDEF) -o"final\cock.o12" "C:/Users/nalex/Java/grudreit/uppgift4/cock.s12"
 "final\main.o12":	\
-	"C:/Users/nalex/Java/grudreit/uppgift3/main.c"\
-	"C:/Users/nalex/Java/grudreit/uppgift3/clock.h"
+	"C:/Users/nalex/Java/grudreit/uppgift4/main.c"\
+	"C:/Users/nalex/Java/grudreit/uppgift4/clock.h"
 	COMP  $(CCFLAGS) $(DEF) $(UNDEF)  \
-	-I"C:\Program Files (x86)\GMV\EducDist\bin\..\include" $(INC) -o"final\main.o12" "C:/Users/nalex/Java/grudreit/uppgift3/main.c"
-"final\displayml15.o12":	\
-	"C:/Users/nalex/Java/grudreit/uppgift3/displayml15.c"\
-	"C:/Users/nalex/Java/grudreit/uppgift3/displayml15.h"\
-	"C:/Users/nalex/Java/grudreit/uppgift3/ports.h"
+	-I"C:\Program Files (x86)\GMV\EducDist\bin\..\include" $(INC) -o"final\main.o12" "C:/Users/nalex/Java/grudreit/uppgift4/main.c"
+"final\drill.o12":	\
+	"C:/Users/nalex/Java/grudreit/uppgift4/drill.c"
 	COMP  $(CCFLAGS) $(DEF) $(UNDEF)  \
-	-I"C:\Program Files (x86)\GMV\EducDist\bin\..\include" $(INC) -o"final\displayml15.o12" "C:/Users/nalex/Java/grudreit/uppgift3/displayml15.c"
+	-I"C:\Program Files (x86)\GMV\EducDist\bin\..\include" $(INC) -o"final\drill.o12" "C:/Users/nalex/Java/grudreit/uppgift4/drill.c"
 !EICONF	Final
