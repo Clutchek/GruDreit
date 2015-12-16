@@ -3,7 +3,8 @@
 #include "clock.h"
 
 static unsigned char dcShadow = 0;
-char bitmaskar[] = {(char)01,(char)02,(char)04,(char)08,(char)16,(char)32,(char)64,(char)128};
+char bitmaskar[] = {(char)(1),(char)(2),(char)(4),(char)(8),(char)(16),(char)(32),(char)(64),(char)(128)};
+int pattern[] = {0,1,1,1,1,1,1,1,2,1,5,2,2,2,2,4,4,3,8,2,0xFF};
 
 //vrider borren 1 steg
 int step(void){
@@ -78,10 +79,34 @@ int DrillHole(void){
 		
 }
 int RefPos(void){
-
+	while(!(ML4IN &(01))){
+		if(!step()){
+			return 0;
+		}
+	}
+	return 1;
+	
 }
 void DoAuto(void){
-
+	int i;
+	if(!RefPos()){
+		MotorStop();
+		return;
+	}
+	MotorStart();
+	while(pattern[i] != 0xFF){
+		if(!Nstep(pattern[i])){
+			MotorStop();
+			return;
+		}
+		if(!DrillHole()){
+			MotorStop();
+			return;
+		}
+		i++;
+	}
+	MotorStop();
+	return;
 }
 
 void Outzero(int bit){

@@ -4,6 +4,7 @@
 #
 #-----------------------------------------------
 #SETTINGS SECTION
+##CSIMSET=".\uppg4.hc12sim"
 ##EXTMAKEFILE=""
 ##EXTMAKEFILEPARAM=""
 #+[BackCol(0)]=
@@ -42,6 +43,7 @@
 ##OTYPE=1
 #-----------------------------------------------
 #OPEN FILE SECTION
+##OF ".\clock.c"
 #-----------------------------------------------
 #PROJECT FILES SECTION
 
@@ -53,7 +55,9 @@ FILES= \
 	".\main.c" "" "1"  \
 	".\ports.h" "" "1"  \
 	".\drill.c" "" "1"  \
-	".\drill.h" "" "1" 
+	".\drill.h" "" "1"  \
+	".\keyboardml15.c" "" "1"  \
+	".\keyboardml15.h" "" "1" 
 #-----------------------------------------------
 #PROJECT OPTIONS SECTION
 
@@ -74,7 +78,8 @@ OBJ= \
 	"debug\clock.o12" \
 	"debug\cock.o12" \
 	"debug\main.o12" \
-	"debug\drill.o12"
+	"debug\drill.o12" \
+	"debug\keyboardml15.o12"
 #-----------------------------------------------
 #DEFINES/UNDEFINES SECTION
 
@@ -130,6 +135,8 @@ clean:
 	RMFI "debug\ports.o12"
 	RMFI "debug\drill.o12"
 	RMFI "debug\drill.o12"
+	RMFI "debug\keyboardml15.o12"
+	RMFI "debug\keyboardml15.o12"
 #-----------------------------------------------
 
 
@@ -148,11 +155,20 @@ clean:
 	ASSM  $(ASFLAGS) $(ASMDEF) -o"debug\cock.o12" "C:/Users/nalex/Java/grudreit/uppgift4/cock.s12"
 "debug\main.o12":	\
 	"C:/Users/nalex/Java/grudreit/uppgift4/main.c"\
-	"C:/Users/nalex/Java/grudreit/uppgift4/clock.h"
+	"C:/Users/nalex/Java/grudreit/uppgift4/clock.h"\
+	"C:/Users/nalex/Java/grudreit/uppgift4/keyboardml15.h"
 	COMP  $(CCFLAGS) $(DEF) $(UNDEF)  $(INC) -o"debug\main.o12" "C:/Users/nalex/Java/grudreit/uppgift4/main.c"
 "debug\drill.o12":	\
-	"C:/Users/nalex/Java/grudreit/uppgift4/drill.c"
+	"C:/Users/nalex/Java/grudreit/uppgift4/drill.c"\
+	"C:/Users/nalex/Java/grudreit/uppgift4/drill.h"\
+	"C:/Users/nalex/Java/grudreit/uppgift4/ports.h"\
+	"C:/Users/nalex/Java/grudreit/uppgift4/clock.h"
 	COMP  $(CCFLAGS) $(DEF) $(UNDEF)  $(INC) -o"debug\drill.o12" "C:/Users/nalex/Java/grudreit/uppgift4/drill.c"
+"debug\keyboardml15.o12":	\
+	"C:/Users/nalex/Java/grudreit/uppgift4/keyboardml15.c"\
+	"C:/Users/nalex/Java/grudreit/uppgift4/keyboardml15.h"\
+	"C:/Users/nalex/Java/grudreit/uppgift4/ports.h"
+	COMP  $(CCFLAGS) $(DEF) $(UNDEF)  $(INC) -o"debug\keyboardml15.o12" "C:/Users/nalex/Java/grudreit/uppgift4/keyboardml15.c"
 !EICONF	Debug
 
 !IFCONF	Final
@@ -172,7 +188,8 @@ OBJ= \
 	"final\clock.o12" \
 	"final\cock.o12" \
 	"final\main.o12" \
-	"final\drill.o12"
+	"final\drill.o12" \
+	"final\keyboardml15.o12"
 #-----------------------------------------------
 #DEFINES/UNDEFINES SECTION
 
@@ -230,6 +247,8 @@ clean:
 	RMFI "final\ports.o12"
 	RMFI "final\drill.o12"
 	RMFI "final\drill.o12"
+	RMFI "final\keyboardml15.o12"
+	RMFI "final\keyboardml15.o12"
 #-----------------------------------------------
 
 
@@ -249,11 +268,21 @@ clean:
 	ASSM  $(ASFLAGS) $(ASMDEF) -o"final\cock.o12" "C:/Users/nalex/Java/grudreit/uppgift4/cock.s12"
 "final\main.o12":	\
 	"C:/Users/nalex/Java/grudreit/uppgift4/main.c"\
-	"C:/Users/nalex/Java/grudreit/uppgift4/clock.h"
+	"C:/Users/nalex/Java/grudreit/uppgift4/clock.h"\
+	"C:/Users/nalex/Java/grudreit/uppgift4/keyboardml15.h"
 	COMP  $(CCFLAGS) $(DEF) $(UNDEF)  \
 	-I"C:\Program Files (x86)\GMV\EducDist\bin\..\include" $(INC) -o"final\main.o12" "C:/Users/nalex/Java/grudreit/uppgift4/main.c"
 "final\drill.o12":	\
-	"C:/Users/nalex/Java/grudreit/uppgift4/drill.c"
+	"C:/Users/nalex/Java/grudreit/uppgift4/drill.c"\
+	"C:/Users/nalex/Java/grudreit/uppgift4/drill.h"\
+	"C:/Users/nalex/Java/grudreit/uppgift4/ports.h"\
+	"C:/Users/nalex/Java/grudreit/uppgift4/clock.h"
 	COMP  $(CCFLAGS) $(DEF) $(UNDEF)  \
 	-I"C:\Program Files (x86)\GMV\EducDist\bin\..\include" $(INC) -o"final\drill.o12" "C:/Users/nalex/Java/grudreit/uppgift4/drill.c"
+"final\keyboardml15.o12":	\
+	"C:/Users/nalex/Java/grudreit/uppgift4/keyboardml15.c"\
+	"C:/Users/nalex/Java/grudreit/uppgift4/keyboardml15.h"\
+	"C:/Users/nalex/Java/grudreit/uppgift4/ports.h"
+	COMP  $(CCFLAGS) $(DEF) $(UNDEF)  \
+	-I"C:\Program Files (x86)\GMV\EducDist\bin\..\include" $(INC) -o"final\keyboardml15.o12" "C:/Users/nalex/Java/grudreit/uppgift4/keyboardml15.c"
 !EICONF	Final
