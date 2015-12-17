@@ -9,12 +9,13 @@ int pattern[] = {0,1,1,1,1,1,1,1,2,1,5,2,2,2,2,4,4,3,8,2,0xFF};
 //vrider borren 1 steg
 int step(void){
 	if(ML4IN &(2)){
-		//‰r i toppl‰ge
+		//√§r i toppl√§ge
 		Outone(1);
 		Outone(0);
+		hold((time_type)250);
 		Outzero(0);
 		hold((time_type)500);
-		return 1;
+		return 1; 
 	}
 	Alarm(2);
 	return 0;
@@ -48,7 +49,7 @@ int DrillDownTest(void){
 	int i;
 	for(i = 0; i < 20; i++){
 		if(ML4IN &(4)){
-			//bottenl‰ge
+			//bottenl√§ge
 			return 1;
 		}
 		hold((time_type)250);
@@ -62,7 +63,7 @@ void Alarm(int amount){
 		Outone(4);
 		hold(1000);
 		Outzero(4);
-		if(!(amount-1)){
+		if(!(i == amount - 1)){
 			//skippa sista iterationen av delay
 			hold(500);
 		}
@@ -88,7 +89,7 @@ int RefPos(void){
 	
 }
 void DoAuto(void){
-	int i;
+	int i = 0;
 	if(!RefPos()){
 		MotorStop();
 		return;
