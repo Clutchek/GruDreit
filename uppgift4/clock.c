@@ -16,12 +16,12 @@ void init_clock(void)
 		
 		// // // // //
 		#ifdef SIMULATOR
-		RTICTL = 0x10; 	//ställer in tid för delay
+		RTICTL = 0x10; 	//stÃ¤ller in tid fÃ¶r delay
 		#else
 		RTICTL = 0x49;
 		#endif
 		
-		CRGINT |= 0x80; //etställer crgints sjunde bit
+		CRGINT |= 0x80; //etstÃ¤ller crgints sjunde bit
 		// // // // //
 		clock_reset();
 }
@@ -43,10 +43,9 @@ time_type get_time(void)
 void hold(time_type delay_time)
 {
 	time_type start_time = get_time();
-	
 	#ifdef SIMULATOR
-	//simulator temp lösning
-	while(get_time() != start_time);
+	//simulator temp lÃ¶sning
+	while(get_time() == start_time);
 	#else
 	while(get_time() - start_time < delay_time);
 	#endif
